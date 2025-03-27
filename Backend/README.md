@@ -141,29 +141,95 @@ The request body must be a JSON object containing:
 }
 ```
 
-## Response and Status Codes
-
-### Success (201)
-- **Status Code:** 201
-- **Response:** Returns a JSON object containing the registered captain's details.
-
-#### Example Response (Success)
+### Success Response (201)
 ```json
 {
-  "fullname": {
-    "firstname": "CaptainJohn",
-    "lastname": "Smith"
-  },
-  "email": "captain.john@example.com",
-  "vehical": {
-    "color": "midnight blue",
-    "plate": "ABC123",
-    "capacity": "4",
-    "vehicalType": "car"
-  }
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "captain": {
+        "_id": "65f4a3b2c1d0...",
+        "fullname": {
+            "firstname": "CaptainJohn",
+            "lastname": "Smith"
+        },
+        "email": "captain@example.com",
+        "vehical": {
+            "color": "midnight blue",
+            "plate": "ABC123",
+            "capacity": "4",
+            "vehicalType": "car"
+        }
+    }
 }
 ```
 
 ### Error (400)
 - **Status Code:** 400
 - **Response:** Returns an error message detailing any validation issues.
+
+## `/captain/login` Endpoint
+
+### Request Body
+```json
+{
+    "email": "captain@example.com", // required, valid email
+    "password": "secret123"         // required, min 6 chars
+}
+```
+
+### Success Response (200)
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "captain": {
+        "_id": "65f4a3b2c1d0...",
+        "fullname": {
+            "firstname": "CaptainJohn",
+            "lastname": "Smith"
+        },
+        "email": "captain@example.com",
+        "vehical": {
+            "color": "midnight blue",
+            "plate": "ABC123",
+            "capacity": "4",
+            "vehicalType": "car"
+        }
+    }
+}
+```
+
+## `/captain/profile` Endpoint
+
+### Authorization
+Requires Bearer token in Authorization header
+
+### Success Response (200)
+```json
+{
+    "captain": {
+        "_id": "65f4a3b2c1d0...",
+        "fullname": {
+            "firstname": "CaptainJohn",
+            "lastname": "Smith"
+        },
+        "email": "captain@example.com",
+        "vehical": {
+            "color": "midnight blue",
+            "plate": "ABC123",
+            "capacity": "4",
+            "vehicalType": "car"
+        }
+    }
+}
+```
+
+## `/captain/logout` Endpoint
+
+### Authorization
+Requires Bearer token in Authorization header
+
+### Success Response (200)
+```json
+{
+    "message": "Successfully logged out"
+}
+```
