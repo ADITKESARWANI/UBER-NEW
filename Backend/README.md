@@ -100,3 +100,70 @@ The request body must be a JSON object containing:
 ### Error (400/401)
 - **Status Code:** 400 or 401
 - **Response:** Returns an error message detailing any validation issues or invalid credentials.
+
+## `/captain/register` Endpoint
+
+## Description
+This endpoint is used to register a new captain (driver). It saves the captain's details including vehicle information in the database and returns the captain's details.
+
+## HTTP Method & URL
+- **Method:** POST
+- **URL:** `/captain/register`
+
+## Required Data
+The request body must be a JSON object containing:
+- `fullname`: An object with:
+  - `firstname` (string, required, minimum 6 characters)
+  - `lastname` (string, required, minimum 6 characters)
+- `email`: A string representing the captain's email, required.
+- `password`: A string representing the captain's password, required (minimum 6 characters).
+- `vehical`: An object with:
+  - `color` (string, required, minimum 6 characters)
+  - `plate` (string, required, minimum 3 characters)
+  - `capacity` (string, required, minimum 1 character)
+  - `vehicalType` (string, required, must be one of: 'car', 'motorcycle', 'auto')
+
+### Example Request Body
+```json
+{
+  "fullname": {
+    "firstname": "CaptainJohn",
+    "lastname": "Smith"
+  },
+  "email": "captain.john@example.com",
+  "password": "securePass123",
+  "vehical": {
+    "color": "midnight blue",
+    "plate": "ABC123",
+    "capacity": "4",
+    "vehicalType": "car"
+  }
+}
+```
+
+## Response and Status Codes
+
+### Success (201)
+- **Status Code:** 201
+- **Response:** Returns a JSON object containing the registered captain's details.
+
+#### Example Response (Success)
+```json
+{
+  "fullname": {
+    "firstname": "CaptainJohn",
+    "lastname": "Smith"
+  },
+  "email": "captain.john@example.com",
+  "vehical": {
+    "color": "midnight blue",
+    "plate": "ABC123",
+    "capacity": "4",
+    "vehicalType": "car"
+  }
+}
+```
+
+### Error (400)
+- **Status Code:** 400
+- **Response:** Returns an error message detailing any validation issues.
