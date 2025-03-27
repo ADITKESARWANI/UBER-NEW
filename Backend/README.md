@@ -53,3 +53,50 @@ The request body must be a JSON object containing:
 ### Error (400)
 - **Status Code:** 400
 - **Response:** Returns an error message detailing any validation issues. For example, if required fields are missing or do not meet validation rules.
+
+## `/users/login` Endpoint
+
+## Description
+This endpoint is used to authenticate an existing user. It validates the user's credentials and returns an authentication token along with user details.
+
+## HTTP Method & URL
+- **Method:** POST
+- **URL:** `/users/login`
+
+## Required Data
+The request body must be a JSON object containing:
+- `email`: A string representing the user's email, required.
+- `password`: A string representing the user's password, required.
+
+### Example Request Body
+```json
+{
+  "email": "john@example.com",
+  "password": "securePass123"
+}
+```
+
+## Response and Status Codes
+
+### Success (200)
+- **Status Code:** 200
+- **Response:** Returns a JSON object containing:
+  - `token`: Authentication token.
+  - `user`: The logged-in user's details.
+
+#### Example Response (Success)
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "firstname": "JohnDoe",
+    "lastname": "Smith",
+    "email": "john@example.com"
+    // ...other user details...
+  }
+}
+```
+
+### Error (400/401)
+- **Status Code:** 400 or 401
+- **Response:** Returns an error message detailing any validation issues or invalid credentials.
